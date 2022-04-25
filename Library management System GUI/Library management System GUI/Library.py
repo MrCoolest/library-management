@@ -1,3 +1,4 @@
+from calendar import month
 from tkinter import *
 from datetime import date
 from tkinter import ttk
@@ -10,10 +11,19 @@ from datetime import datetime
 from datetime import timedelta
 import smtplib
 from PIL import Image, ImageTk
+import json
 
 db=sqlite3.connect('admin.db')
 dd=sqlite3.connect('storebook.db')
 dc=sqlite3.connect('students.db')
+
+
+# Json file
+with open("config.json") as fl:
+    content = json.load(fl)["content"]
+
+
+# print(content['id'])
 
 root = Tk()
 root.title("Library Management System")
@@ -35,12 +45,12 @@ class maincode:
                #messagebox.showinfo('Library System',ab[1])
              self.under_fm=Frame(root,height=500,width=900,bg='#fff')
              self.under_fm.place(x=0,y=0)
-             self.fm2=Frame(root,bg='#0f624c',height=80,width=900)
+             self.fm2=Frame(root,bg='#0f624c',height=90,width=900)
              self.fm2.place(x=0,y=0)
 
              self.lbb=Label(self.fm2,bg='#0f624c')
              self.lbb.place(x=15,y=5)
-             self.ig=PhotoImage(file='library.png')
+             self.ig=PhotoImage(file='logo2.png')
              self.lbb.config(image=self.ig)
              self.lb3=Label(self.fm2,text='DASHBOARD',fg='White',bg='#0f624c',font=('Arial',30,'bold'))
              self.lb3.place(x=325,y=17)
@@ -49,17 +59,17 @@ class maincode:
              #----------------------------name------------------------
 
              self.name=Label(root,text="Name : ",bg='#fff',fg="black",font=('Arial',10,'bold'))
-             self.name.place(x=5,y=83)
+             self.name.place(x=5,y=90)
              self.name1=Label(root,text=self.ab[1],fg='black',bg='#fff',font=('Arial',10,'bold'))
-             self.name1.place(x=60,y=83)
+             self.name1.place(x=60,y=90)
 
              #------------------------date-------------------------
 
              self.today=date.today()
              self.dat=Label(root,text='Date : ',bg='#fff',fg='black',font=('Arial',10,'bold'))
-             self.dat.place(x=740,y=83)
+             self.dat.place(x=740,y=90)
              self.dat2 = Label(root, text=self.today, bg='#fff', fg='black', font=('Arial', 10, 'bold'))
-             self.dat2.place(x=790, y=83)
+             self.dat2.place(x=790, y=90)
 
              self.cur()
 
@@ -67,8 +77,8 @@ class maincode:
                messagebox.showerror('Library System', 'Your ID or Password is not Valid')
              #---------------------------------------------------------
      def cur(self):
-             self.fm3=Frame(root,bg='#fff',width=900,height=390)
-             self.fm3.place(x=0,y=110)
+             self.fm3=Frame(root,bg='#fff',width=900,height=420)
+             self.fm3.place(x=0,y=111)
 
              #------------------------Clock---------------------------
 
@@ -112,7 +122,7 @@ class maincode:
 
              self.canvas8 = Canvas(self.fm3, bg='black', width=400, height=300)
              self.canvas8.place(x=475, y=37)
-             self.photo9=PhotoImage(file="bb.png")
+             self.photo9=PhotoImage(file="lib.png")
             #  self.photo9=PhotoImage(Image.open("lib.jpg"))
              self.canvas8.create_image(0,0,image=self.photo9,anchor=NW)
 
@@ -244,28 +254,32 @@ class maincode:
                  self.ll=Label(self.f,text='ADD BOOKS',fg='#fff',bg='#0f624c',font=('Arial',12,'bold'))
                  self.ll.place(x=200,y=6)
                  self.lb=Label(self.fm1,text='ID',fg='black',bg='#fff',font=('Arial',10,'bold'))
-                 self.lb.place(x=70,y=90)
+                 self.lb.place(x=70,y=50)
                  self.lb2 = Label(self.fm1, text='Title', fg='black', bg='#fff', font=('Arial', 10, 'bold'))
-                 self.lb2.place(x=70, y=130)
+                 self.lb2.place(x=70, y=90)
                  self.lb3 = Label(self.fm1, text='Author', fg='black', bg='#fff', font=('Arial', 10, 'bold'))
-                 self.lb3.place(x=70, y=170)
+                 self.lb3.place(x=70, y=130)
                  self.lb4= Label(self.fm1, text='Edition', fg='black', bg='#fff', font=('Arial', 10, 'bold'))
-                 self.lb4.place(x=70, y=210)
+                 self.lb4.place(x=70, y=170)
                  self.lb5 = Label(self.fm1, text='Price', fg='black', bg='#fff', font=('Arial', 10, 'bold'))
-                 self.lb5.place(x=70, y=250)
+                 self.lb5.place(x=70, y=210)
+                 self.lb6 = Label(self.fm1, text='shelve no', fg='black', bg='#fff', font=('Arial', 10, 'bold'))
+                 self.lb6.place(x=70, y=250)
 
                  #-------------------------------Entry-------------------------------------
 
                  self.ee1=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
-                 self.ee1.place(x=180,y=88)
+                 self.ee1.place(x=180,y=50)
                  self.ee2=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
-                 self.ee2.place(x=180,y=130)
+                 self.ee2.place(x=180,y=90)
                  self.ee3=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
-                 self.ee3.place(x=180,y=170)
+                 self.ee3.place(x=180,y=130)
                  self.ee4=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
-                 self.ee4.place(x=180,y=210)
+                 self.ee4.place(x=180,y=170)
                  self.ee5=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
-                 self.ee5.place(x=180,y=250)
+                 self.ee5.place(x=180,y=210)
+                 self.ee6=Entry(self.fm1,width=25,bd=4,relief='groove',font=('arial',12,'bold'))
+                 self.ee6.place(x=180,y=250)
 
                  self.bt=Button(self.fm1,text='Submit',width=41,bg='red',fg='#fff',font=('Arial',10,'bold'),bd=5,
                           relief='flat',command=self.submit1)
@@ -283,9 +297,10 @@ class maincode:
                  self.aut=self.ee3.get()
                  self.edi=self.ee4.get()
                  self.pri=self.ee5.get()
+                 self.shel=self.ee6.get()
                  cursor=dd.cursor()
-                 cursor.execute("INSERT INTO stbook(Book_ID,Title,Author,Edition,Price) values(?,?,?,?,?)",(self.id,
-                                                                                                      self.ttl,self.aut,self.edi,self.pri))
+                 cursor.execute("INSERT INTO stbook(Book_ID,Title,Author,Edition,Price,shelve_no) values(?,?,?,?,?,?)",(self.id,
+                                                                                                      self.ttl,self.aut,self.edi,self.pri,self.shel))
                  dd.commit()
                  self.clear()
 
@@ -295,6 +310,7 @@ class maincode:
                  self.ee3.delete(0,END)
                  self.ee4.delete(0,END)
                  self.ee5.delete(0,END)
+                 self.ee6.delete(0,END)
 
          obj=temp()
          obj.book()
@@ -430,7 +446,7 @@ class maincode:
                               self.boot.title("Issue Books")
                               self.boot.iconbitmap("aa.ico")
                               self.boot.configure(bg='#fff')
-                              self.boot.geometry("300x680+1000+50")
+                              self.boot.geometry("300x680+1000+10")
                               self.boot.resizable(0,0)
 
                               self.lb=Label(self.boot,text='Title',bg='#fff',fg='black',font=('Arial',10,'bold'))
@@ -534,9 +550,12 @@ class maincode:
 
 
                         self.x = date.today()
+                        datetime_mod = datetime.now()
+                        year = datetime_mod.year
+                        month = datetime_mod.month
+                        day = datetime_mod.day
 
-
-                        self.cal = Calendar(self.boot, selectmode="day", bg='black',year=2020,month=9,day=6)
+                        self.cal = Calendar(self.boot, selectmode="day", bg='black',year=year,month=month,day=day)
                         self.cal.place(x=20,y=380)
 
 
@@ -602,21 +621,19 @@ class maincode:
                     cursor=dc.cursor()
                     cursor.execute("SELECT * FROM student WHERE ERP_ID='"+self.baby+"'")
                     self.var=cursor.fetchone()
-                    sender = "aps08072001@gmail.com"
+                    sender = content['email']
                     reciever =self.var[5]
-                    with open("pass.txt",'r') as file:
-                            password=file.read()
-                    message = """FROM: LIBRARY DEPARTMENT
-                              TO : Library Issued Books Department
-                              Subject: Hello Students! Your book has benn Issued"""
+                    password=content['passwd']
+                    message = f"\n Hello {self.var[1]}! Your book has been Issued \n Please submit before {self.var[9]}"
                     try:
                         server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
                         server.login(sender, password)
                         server.sendmail(sender, reciever, message)
-                        print("ok")
                         messagebox.showinfo("Library System","Send mail Successfully !")
-                    except:
-                         pass
+                    except Exception as e:
+                        print(e)
+
+                        
          obk=test()
          obk.issue()
 
@@ -1010,7 +1027,7 @@ class maincode:
                  self.scroll_x=Scrollbar(self.table_frame,orient=HORIZONTAL)
                  self.scroll_y=Scrollbar(self.table_frame,orient=VERTICAL)
                  self.book_table=ttk.Treeview(self.table_frame,columns=("Book ID","Title","Author","Edition",
-                                                                           "Price"),
+                                                                           "Price","shelve_no"),
                                       xscrollcommand=self.scroll_x.set,yscrollcommand=self.scroll_y.set)
                  self.scroll_x.pack(side=BOTTOM,fill=X)
                  self.scroll_y.pack(side=RIGHT, fill=Y)
@@ -1022,12 +1039,14 @@ class maincode:
                  self.book_table.heading("Author", text="Author")
                  self.book_table.heading("Edition", text="Edition")
                  self.book_table.heading("Price", text="Price")
+                 self.book_table.heading("shelve_no", text="shelve_no")
                  self.book_table['show']='headings'
-                 self.book_table.column("Book ID",width=200)
+                 self.book_table.column("Book ID",width=90)
                  self.book_table.column("Title", width=200)
                  self.book_table.column("Author", width=200)
                  self.book_table.column("Edition", width=120)
                  self.book_table.column("Price", width=110)
+                 self.book_table.column("shelve_no", width=110)
                  self.book_table.pack(fill=BOTH,expand=1)
                  self.fetch_data()
 
@@ -1056,24 +1075,25 @@ class maincode:
          self.canvas=Canvas(self.fm,height=500,width=900,bg='#22224b')
          self.canvas.place(x=0,y=0)
 
-         self.photo=PhotoImage(file="E:\\Main Drive\\Peoples Projects\\Library Management Desktop Application\\Library management System GUI\\Library management System GUI\\images (17).png")
-         self.canvas.create_image(70,45,image=self.photo,anchor=NW)
+         self.photo=PhotoImage(file="cover.png")
+         self.canvas.create_image(0,0,image=self.photo,anchor=NW)
 
-         self.fm1=Frame(self.canvas,height=260,width=300,bg='white',bd=3,relief='ridge')
+         self.fm1=Frame(self.canvas,height=260,width=300,bg='#A0A0A0',bd=3,relief='ridge')
          self.fm1.place(x=300,y=170)
 
-         self.photo1=PhotoImage(file="E:\\Main Drive\\Peoples Projects\\Library Management Desktop Application\\Library management System GUI\\Library management System GUI\\dd.png")
+         self.photo1=PhotoImage(file="dd.png")
          self.canvas.create_image(330,5,image=self.photo1,anchor=NW)
 
 
 
-         self.b1=Label(self.fm1,text='User ID',bg='white',font=('Arial',10,'bold'))
+         self.b1=Label(self.fm1,text='User ID',bg='#A0A0A0',font=('Arial',10,'bold'))
          self.b1.place(x=20,y=42)
 
          self.e1=Entry(self.fm1,width=22,font=('arial',9,'bold'),bd=4,relief='groove')
          self.e1.place(x=100,y=40)
+         self.e1.focus_set()
 
-         self.lb2=Label(self.fm1,text='Password',bg='white',font=('Arial',10,'bold'))
+         self.lb2=Label(self.fm1,text='Password',bg='#A0A0A0',font=('Arial',10,'bold'))
          self.lb2.place(x=20,y=102)
 
          self.e2=Entry(self.fm1,width=22,show='*',font=('arial',9,'bold'),bd=4,relief='groove')
@@ -1100,7 +1120,7 @@ class maincode:
 
          #-----------------------label clicked change password---------------------
 
-         self.forgot=Label(self.fm1,text='forgotten password',fg='red',bg='#fff',activeforeground='black',
+         self.forgot=Label(self.fm1,text='forgotten password',fg='red',bg='#A0A0A0',activeforeground='black',
                            font=('cursive',9,'bold'))
          self.forgot.place(x=80,y=220)
          self.forgot.bind("<Button>",self.mouseClick)
